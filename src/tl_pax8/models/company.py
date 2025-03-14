@@ -35,7 +35,8 @@ class Company(BaseModel):
     website: StrictStr = Field(description="The full URL of the company website")
     external_id: Optional[StrictStr] = Field(default=None, description="An external ID that can be assigned to the company for reference", alias="externalId")
     bill_on_behalf_of_enabled: StrictBool = Field(description="Value is ```true``` if Pax8 handles billing transactions, value is ```false``` if partner handles billing transactions", alias="billOnBehalfOfEnabled")
-    self_service_allowed: StrictBool = Field(description="Value is ```true``` if self-service privileges are available to the company, otherwise value is ```false```", alias="selfServiceAllowed")
+    # Treeline Modification
+    self_service_allowed: bool | None = Field(default=None, description="Value is ```true``` if self-service privileges are available to the company, otherwise value is ```false```", alias="selfServiceAllowed")
     order_approval_required: StrictBool = Field(description="Value is ```true``` if the company's self-service orders require approval, otherwise value is ```false```", alias="orderApprovalRequired")
     status: Optional[StrictStr] = Field(default=None, description="Company Status:   * `Active` - The company is active   * `Inactive` - The company is inactive due to missing contacts   * `Deleted` - The company has been deleted ")
     updated_date: Optional[datetime] = Field(default=None, description="The date and time the company was last updated", alias="updatedDate")

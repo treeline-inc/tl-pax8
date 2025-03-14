@@ -74,6 +74,9 @@ class ApiClient:
 
     def __init__(
         self,
+        # Treeline Modification
+        client_id: str,
+        client_secret: str,
         configuration=None,
         header_name=None,
         header_value=None,
@@ -92,6 +95,15 @@ class ApiClient:
         # Set default User-Agent.
         self.user_agent = 'OpenAPI-Generator/1.0.0/python'
         self.client_side_validation = configuration.client_side_validation
+
+        # Treeline Modification
+        self.client_id = client_id
+        self.client_secret = client_secret
+
+        # Treeline Modification
+        if self.client_id and self.client_secret:
+            self.retrieve_access_token()
+
 
     def __enter__(self):
         return self
@@ -137,6 +149,25 @@ class ApiClient:
         :param default: object of ApiClient.
         """
         cls._default = default
+
+    def retrieve_access_token(self):
+        """Retrieve access token using client_id and client_secret."""
+        # Treeline Modification
+        # Import AccessTokenApi locally to avoid circular import
+        from tl_pax8.api.access_token_api import AccessTokenApi
+        from tl_pax8.models.token_request import TokenRequest
+
+        token_request = TokenRequest(
+            client_id=self.client_id,
+            client_secret=self.client_secret,
+            audience="api://p8p.client",
+            grant_type="client_credentials",
+        )
+        access_token_api = AccessTokenApi(self)
+        token_response = access_token_api.create_access_token(
+            token_request=token_request
+        )
+        self.configuration.access_token = token_response.access_token
 
     def param_serialize(
         self,

@@ -21,3 +21,16 @@
 #docs/*.md
 # Then explicitly reverse the ignore rule for a single file:
 #!docs/README.md
+
+# Ignore modifications to the api_client since we made changes to auth
+tl_pax8/api_client.py
+
+# Made self_service_allowed optional
+models/company.py
+
+# Add enum option to LineItem.billing_term
+# Make line_item_number optional
+models/line_item.py
+
+# Add enum option to Order.ordered_by
+models/order.py
