@@ -1,0 +1,16 @@
+[project]
+name = "tl-pax8"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "Jacob Hoffman", email = "jacob@treeline.ai" }
+]
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+tl-pax8 = "tl_pax8:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
