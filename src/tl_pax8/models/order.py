@@ -44,8 +44,10 @@ class Order(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['Pax8 Partner', 'Customer', 'Pax8']):
-            raise ValueError("must be one of enum values ('Pax8 Partner', 'Customer', 'Pax8')")
+        # Treeline Modification
+        allowed_values = set(['Pax8 Partner', 'Customer', 'Pax8', 'Pax8Partner'])
+        if value not in allowed_values:
+            raise ValueError(f"must be one of enum values ({', '.join(allowed_values)})")
         return value
 
     model_config = ConfigDict(
