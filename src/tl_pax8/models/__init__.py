@@ -16,11 +16,8 @@
 # import models into model package
 from tl_pax8.models.address import Address
 from tl_pax8.models.commitment import Commitment
-from tl_pax8.models.companies_company_id_contacts_get200_response import CompaniesCompanyIdContactsGet200Response
 from tl_pax8.models.company import Company
 from tl_pax8.models.company_update import CompanyUpdate
-from tl_pax8.models.contact import Contact
-from tl_pax8.models.contact_type import ContactType
 from tl_pax8.models.create_line_item import CreateLineItem
 from tl_pax8.models.create_order import CreateOrder
 from tl_pax8.models.dependencies import Dependencies
@@ -29,16 +26,10 @@ from tl_pax8.models.error_detail import ErrorDetail
 from tl_pax8.models.find_all_products200_response import FindAllProducts200Response
 from tl_pax8.models.find_companies200_response import FindCompanies200Response
 from tl_pax8.models.find_orders200_response import FindOrders200Response
-from tl_pax8.models.find_partner_invoice_items200_response import FindPartnerInvoiceItems200Response
-from tl_pax8.models.find_partner_invoices200_response import FindPartnerInvoices200Response
 from tl_pax8.models.find_pricing_by_product_id200_response import FindPricingByProductId200Response
 from tl_pax8.models.find_provision_details_by_product_id200_response import FindProvisionDetailsByProductId200Response
 from tl_pax8.models.find_subscription_history_by_subscription_id200_response import FindSubscriptionHistoryBySubscriptionId200Response
-from tl_pax8.models.find_subscription_usage_summaries200_response import FindSubscriptionUsageSummaries200Response
 from tl_pax8.models.find_subscriptions200_response import FindSubscriptions200Response
-from tl_pax8.models.find_usage_lines200_response import FindUsageLines200Response
-from tl_pax8.models.invoice import Invoice
-from tl_pax8.models.invoice_item import InvoiceItem
 from tl_pax8.models.line_item import LineItem
 from tl_pax8.models.order import Order
 from tl_pax8.models.page import Page
@@ -51,5 +42,3 @@ from tl_pax8.models.subscription import Subscription
 from tl_pax8.models.subscription_commitment import SubscriptionCommitment
 from tl_pax8.models.token_request import TokenRequest
 from tl_pax8.models.token_response import TokenResponse
-from tl_pax8.models.usage_line import UsageLine
-from tl_pax8.models.usage_summary import UsageSummary

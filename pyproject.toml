@@ -1,12 +1,16 @@
 [project]
 name = "tl-pax8"
 version = "0.1.0"
-description = "Add your description here"
+description = "Pax8 API client"
 authors = [
-    { name = "Jacob Hoffman", email = "jacob@treeline.ai" }
+    { name = "Treeline Engineering", email = "engineering@treeline.ai" }
 ]
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+    "pydantic>=2.10.6",
+    "python-dateutil>=2.9.0.post0",
+    "urllib3>=2.3.0",
+]
 
 [project.scripts]
 tl-pax8 = "tl_pax8:main"

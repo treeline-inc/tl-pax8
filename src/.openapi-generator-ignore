@@ -34,3 +34,6 @@ models/line_item.py
 
 # Add enum option to Order.ordered_by
 models/order.py
+
+# Add product_id, sku_id, and segment to Product model
+models/product.py
