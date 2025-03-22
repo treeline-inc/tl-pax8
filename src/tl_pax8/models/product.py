@@ -34,13 +34,35 @@ class Product(BaseModel):
     vendor_sku: Optional[StrictStr] = Field(default=None, description="The product vendor sku", alias="vendorSku")
     alt_vendor_sku: Optional[StrictStr] = Field(default=None, description="The Microsoft legacy sku has been deprecated. Please transition to vendorSku", alias="altVendorSku")
     requires_commitment: Optional[StrictBool] = Field(default=None, description="Whether the product requires a commitment", alias="requiresCommitment")
-    __properties: ClassVar[List[str]] = ["id", "name", "vendorName", "shortDescription", "sku", "vendorSku", "altVendorSku", "requiresCommitment"]
+    product_id: Optional[StrictStr] = Field(default=None, description="The product id", alias="productId")
+    sku_id: Optional[StrictStr] = Field(default=None, description="The sku id", alias="skuId")
+    segment: Optional[StrictStr] = Field(default=None, description="The segment of the product", alias="segment")
+    __properties: ClassVar[List[str]] = ["id", "name", "vendorName", "shortDescription", "sku", "vendorSku", "altVendorSku", "requiresCommitment", "productId", "skuId", "segment"]
 
     model_config = ConfigDict(
         populate_by_name=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
+
+    def model_post_init(self, __context):
+        super().model_post_init(__context)
+        if self.vendor_name != "Microsoft" or not self.vendor_sku:
+            return
+
+        # Parse vendor_sku string directly
+        try:
+            # Try parsing as JSON
+            data = json.loads(self.vendor_sku)
+            self.product_id = data.get("productId")
+            self.sku_id = data.get("skuId")
+            self.segment = data.get("segment") or data.get("segmentName")
+        except json.JSONDecodeError:
+            # Try parsing as productId:skuId format using regex if it's not JSON
+            product_sku_pattern = re.compile(r'^([^:]+):(.+)$')
+            if match := product_sku_pattern.match(self.vendor_sku):
+                self.product_id = match.group(1)
+                self.sku_id = match.group(2)
 
 
     def to_str(self) -> str:
