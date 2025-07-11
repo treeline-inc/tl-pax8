@@ -160,7 +160,9 @@ class Subscription(BaseModel):
             "partnerCost": obj.get("partnerCost"),
             "billingTerm": obj.get("billingTerm"),
             "provisioningDetails": [ProvisioningDetail.from_dict(_item) for _item in obj["provisioningDetails"]] if obj.get("provisioningDetails") is not None else None,
-            "commitmentTerm": SubscriptionCommitment.from_dict(obj["commitmentTerm"]) if obj.get("commitmentTerm") is not None else None
+            # TREELINE CHANGE
+            # OpenAPI spec has commitmentTerm, but the actual field is commitment
+            "commitmentTerm": SubscriptionCommitment.from_dict(obj["commitment"]) if obj.get("commitment") is not None else None
         })
         return _obj
 
