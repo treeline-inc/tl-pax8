@@ -14,11 +14,15 @@ We will inevitably need to make changes to the generated library to add function
 ```bash
 uv init --package --no-readme 
 ``` 
-2. Download the Authentication and Partner endpoint open api specs from [here](https://devx.pax8.com/openapi).
-3. Merge the two specs into a single file. You can use a tool like [openapi-merge-cli](https://www.npmjs.com/package/openapi-merge-cli) to do this.
+2. Download the Authentication and Partner endpoint open api specs from [here](https://devx.pax8.com/openapi), and put them in [spec/authentication.pax8.json](spec/authentication.pax8.json) and [spec/partner-endpoints.pax8.json](spec/partner-endpoints.pax8.json) respectively.
+3. Merge the two specs into a single file:
+```bash
+# from the devcontainer
+openapi-merge-cli -c spec/merge.config.json
+```
 4. Run the following command to generate the library:
 
 ```bash
 # from the devcontainer
-openapi-generator generate -i <path to merged spec> -g python -c config.yaml -o src
+openapi-generator-cli generate -c spec/config.yaml
 ```
