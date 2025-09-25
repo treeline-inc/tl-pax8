@@ -44,6 +44,7 @@ tl_pax8/models/page.py
 tl_pax8/models/pricing.py
 tl_pax8/models/product.py
 tl_pax8/models/product_dependency.py
+tl_pax8/models/product_detail.py
 tl_pax8/models/provisioning_detail.py
 tl_pax8/models/rate.py
 tl_pax8/models/subscription.py

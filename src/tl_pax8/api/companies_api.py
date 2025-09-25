@@ -58,7 +58,7 @@ class CompaniesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Company:
-        """Fetch a single company record by companyId
+        """Get Company By ID
 
         Returns a single company record matching the ```companyId``` you specify
 
@@ -126,7 +126,7 @@ class CompaniesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Company]:
-        """Fetch a single company record by companyId
+        """Get Company By ID
 
         Returns a single company record matching the ```companyId``` you specify
 
@@ -194,7 +194,7 @@ class CompaniesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Fetch a single company record by companyId
+        """Get Company By ID
 
         Returns a single company record matching the ```companyId``` you specify
 
@@ -322,7 +322,7 @@ class CompaniesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Company:
-        """Create a new Company
+        """Create Company
 
         Creates a new Company. ATTENTION - The Company will be placed in an “inactive” status until the [Company has primary Contacts added](#tag/Contacts). Once contacts are added, the company will move to “active”.
 
@@ -390,7 +390,7 @@ class CompaniesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Company]:
-        """Create a new Company
+        """Create Company
 
         Creates a new Company. ATTENTION - The Company will be placed in an “inactive” status until the [Company has primary Contacts added](#tag/Contacts). Once contacts are added, the company will move to “active”.
 
@@ -458,7 +458,7 @@ class CompaniesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Create a new Company
+        """Create Company
 
         Creates a new Company. ATTENTION - The Company will be placed in an “inactive” status until the [Company has primary Contacts added](#tag/Contacts). Once contacts are added, the company will move to “active”.
 
@@ -609,7 +609,7 @@ class CompaniesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FindCompanies200Response:
-        """Fetch a paginated list of your companies
+        """List Companies
 
         Returns a paginated list of all your companies filtered by optional parameters
 
@@ -716,7 +716,7 @@ class CompaniesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FindCompanies200Response]:
-        """Fetch a paginated list of your companies
+        """List Companies
 
         Returns a paginated list of all your companies filtered by optional parameters
 
@@ -823,7 +823,7 @@ class CompaniesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Fetch a paginated list of your companies
+        """List Companies
 
         Returns a paginated list of all your companies filtered by optional parameters
 
@@ -1033,7 +1033,7 @@ class CompaniesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Company:
-        """Update an existing Company
+        """Update Company
 
         Updates an existing Company. ATTENTION - at least one parameter has to be modified.
 
@@ -1105,7 +1105,7 @@ class CompaniesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Company]:
-        """Update an existing Company
+        """Update Company
 
         Updates an existing Company. ATTENTION - at least one parameter has to be modified.
 
@@ -1177,7 +1177,7 @@ class CompaniesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Update an existing Company
+        """Update Company
 
         Updates an existing Company. ATTENTION - at least one parameter has to be modified.
 
