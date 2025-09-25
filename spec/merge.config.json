@@ -1,0 +1,11 @@
+{
+    "inputs": [
+        {
+            "inputFile": "./authentication.pax8.json"
+        },
+        {
+            "inputFile": "./partner-endpoints.pax8.json"
+        }
+    ],
+    "output": "./pax8.json"
+}
