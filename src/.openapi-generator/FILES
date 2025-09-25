@@ -8,7 +8,6 @@ tl_pax8/api/orders_api.py
 tl_pax8/api/products_api.py
 tl_pax8/api/subscriptions_api.py
 tl_pax8/api/usage_summaries_api.py
-tl_pax8/api_client.py
 tl_pax8/api_response.py
 tl_pax8/configuration.py
 tl_pax8/exceptions.py

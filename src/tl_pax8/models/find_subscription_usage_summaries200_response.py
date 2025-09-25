@@ -17,24 +17,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
+from tl_pax8.models.page import Page
+from tl_pax8.models.usage_summary import UsageSummary
 from typing import Optional, Set
 from typing_extensions import Self
 
-class Product(BaseModel):
+class FindSubscriptionUsageSummaries200Response(BaseModel):
     """
-    Product
+    FindSubscriptionUsageSummaries200Response
     """ # noqa: E501
-    id: Optional[StrictStr] = None
-    name: Optional[StrictStr] = Field(default=None, description="The name of a product")
-    vendor_name: Optional[StrictStr] = Field(default=None, description="The name of the vendor", alias="vendorName")
-    short_description: Optional[StrictStr] = Field(default=None, description="A short description of the product", alias="shortDescription")
-    sku: Optional[StrictStr] = Field(default=None, description="The product sku")
-    vendor_sku: Optional[StrictStr] = Field(default=None, description="The product vendor sku", alias="vendorSku")
-    alt_vendor_sku: Optional[StrictStr] = Field(default=None, description="The Microsoft legacy sku has been deprecated. Please transition to vendorSku", alias="altVendorSku")
-    requires_commitment: Optional[StrictBool] = Field(default=None, description="Whether the product requires a commitment", alias="requiresCommitment")
-    __properties: ClassVar[List[str]] = ["id", "name", "vendorName", "shortDescription", "sku", "vendorSku", "altVendorSku", "requiresCommitment"]
+    content: Optional[List[UsageSummary]] = None
+    page: Optional[Page] = None
+    __properties: ClassVar[List[str]] = ["content", "page"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -54,7 +50,7 @@ class Product(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of Product from a JSON string"""
+        """Create an instance of FindSubscriptionUsageSummaries200Response from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -66,10 +62,8 @@ class Product(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
-        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
-            "id",
         ])
 
         _dict = self.model_dump(
@@ -77,11 +71,21 @@ class Product(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in content (list)
+        _items = []
+        if self.content:
+            for _item_content in self.content:
+                if _item_content:
+                    _items.append(_item_content.to_dict())
+            _dict['content'] = _items
+        # override the default output from pydantic by calling `to_dict()` of page
+        if self.page:
+            _dict['page'] = self.page.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of Product from a dict"""
+        """Create an instance of FindSubscriptionUsageSummaries200Response from a dict"""
         if obj is None:
             return None
 
@@ -89,14 +93,8 @@ class Product(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "name": obj.get("name"),
-            "vendorName": obj.get("vendorName"),
-            "shortDescription": obj.get("shortDescription"),
-            "sku": obj.get("sku"),
-            "vendorSku": obj.get("vendorSku"),
-            "altVendorSku": obj.get("altVendorSku"),
-            "requiresCommitment": obj.get("requiresCommitment")
+            "content": [UsageSummary.from_dict(_item) for _item in obj["content"]] if obj.get("content") is not None else None,
+            "page": Page.from_dict(obj["page"]) if obj.get("page") is not None else None
         })
         return _obj
 

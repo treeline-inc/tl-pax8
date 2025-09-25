@@ -33,8 +33,7 @@ class LineItem(BaseModel):
     subscription_id: Optional[StrictStr] = Field(default=None, alias="subscriptionId")
     commitment_term_id: Optional[StrictStr] = Field(default=None, alias="commitmentTermId")
     provision_start_date: Optional[datetime] = Field(default=None, alias="provisionStartDate")
-    # Treeline Modification
-    line_item_number: Union[StrictFloat, StrictInt, None] = Field(default=None, description="Required. Number used as a reference to the line item for parent line items", alias="lineItemNumber")
+    line_item_number: Union[StrictFloat, StrictInt] = Field(description="Required. Number used as a reference to the line item for parent line items", alias="lineItemNumber")
     billing_term: Optional[StrictStr] = Field(default=None, alias="billingTerm")
     parent_subscription_id: Optional[StrictStr] = Field(default=None, description="Reference to the subscription this item depends on", alias="parentSubscriptionId")
     parent_line_item_number: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Reference to the required parent line item in this same order", alias="parentLineItemNumber")
@@ -48,10 +47,8 @@ class LineItem(BaseModel):
         if value is None:
             return value
 
-        # Treeline Modification
-        allowed_values = set(['Monthly', 'Annual', '2-Year', '3-Year', '1-Time', 'Trial', 'Activation', 'One-Time'])
-        if value not in allowed_values:
-            raise ValueError(f"must be one of enum values ({', '.join(allowed_values)})")
+        if value not in set(['Monthly', 'Annual', '2-Year', '3-Year', '1-Time', 'Trial', 'Activation']):
+            raise ValueError("must be one of enum values ('Monthly', 'Annual', '2-Year', '3-Year', '1-Time', 'Trial', 'Activation')")
         return value
 
     model_config = ConfigDict(
