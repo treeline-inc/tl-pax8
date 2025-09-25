@@ -59,7 +59,7 @@ class SubscriptionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Subscription:
-        """Fetch a subscription by subscriptionId
+        """Get Subscription By ID
 
         Returns the Subscription record specified by the subscriptionId
 
@@ -127,7 +127,7 @@ class SubscriptionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Subscription]:
-        """Fetch a subscription by subscriptionId
+        """Get Subscription By ID
 
         Returns the Subscription record specified by the subscriptionId
 
@@ -195,7 +195,7 @@ class SubscriptionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Fetch a subscription by subscriptionId
+        """Get Subscription By ID
 
         Returns the Subscription record specified by the subscriptionId
 
@@ -323,7 +323,7 @@ class SubscriptionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FindSubscriptionHistoryBySubscriptionId200Response:
-        """Fetch the history of a subscription
+        """Get Subscription History
 
         Returns a list of changes for a subscription
 
@@ -391,7 +391,7 @@ class SubscriptionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FindSubscriptionHistoryBySubscriptionId200Response]:
-        """Fetch the history of a subscription
+        """Get Subscription History
 
         Returns a list of changes for a subscription
 
@@ -459,7 +459,7 @@ class SubscriptionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Fetch the history of a subscription
+        """Get Subscription History
 
         Returns a list of changes for a subscription
 
@@ -593,7 +593,7 @@ class SubscriptionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FindSubscriptions200Response:
-        """Fetch a paginated list of subscriptions
+        """List Subscriptions
 
         Fetch a paginated list of subscriptions. Default page is 0 and default size is 10. The maximum page size is 200
 
@@ -685,7 +685,7 @@ class SubscriptionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FindSubscriptions200Response]:
-        """Fetch a paginated list of subscriptions
+        """List Subscriptions
 
         Fetch a paginated list of subscriptions. Default page is 0 and default size is 10. The maximum page size is 200
 
@@ -777,7 +777,7 @@ class SubscriptionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Fetch a paginated list of subscriptions
+        """List Subscriptions
 
         Fetch a paginated list of subscriptions. Default page is 0 and default size is 10. The maximum page size is 200
 
@@ -956,7 +956,7 @@ class SubscriptionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """Cancel a subscription
+        """Cancel Subscription
 
         Cancels the Subscription specified by subscriptionId
 
@@ -1028,7 +1028,7 @@ class SubscriptionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """Cancel a subscription
+        """Cancel Subscription
 
         Cancels the Subscription specified by subscriptionId
 
@@ -1100,7 +1100,7 @@ class SubscriptionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Cancel a subscription
+        """Cancel Subscription
 
         Cancels the Subscription specified by subscriptionId
 
@@ -1246,7 +1246,7 @@ class SubscriptionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Subscription:
-        """Update a specified subscription
+        """Update Subscription
 
         Updates a subscription. Currently NOT supported for subscriptions with a future date.
 
@@ -1319,7 +1319,7 @@ class SubscriptionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Subscription]:
-        """Update a specified subscription
+        """Update Subscription
 
         Updates a subscription. Currently NOT supported for subscriptions with a future date.
 
@@ -1392,7 +1392,7 @@ class SubscriptionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Update a specified subscription
+        """Update Subscription
 
         Updates a subscription. Currently NOT supported for subscriptions with a future date.
 

@@ -22,19 +22,20 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class Product(BaseModel):
+class ProductDetail(BaseModel):
     """
-    Product
+    ProductDetail
     """ # noqa: E501
     id: Optional[StrictStr] = None
     name: Optional[StrictStr] = Field(default=None, description="The name of a product")
     vendor_name: Optional[StrictStr] = Field(default=None, description="The name of the vendor", alias="vendorName")
     short_description: Optional[StrictStr] = Field(default=None, description="A short description of the product", alias="shortDescription")
+    description: Optional[StrictStr] = Field(default=None, description="A long description of the Product")
     sku: Optional[StrictStr] = Field(default=None, description="The product sku")
     vendor_sku: Optional[StrictStr] = Field(default=None, description="The product vendor sku", alias="vendorSku")
     alt_vendor_sku: Optional[StrictStr] = Field(default=None, description="The Microsoft legacy sku has been deprecated. Please transition to vendorSku", alias="altVendorSku")
     requires_commitment: Optional[StrictBool] = Field(default=None, description="Whether the product requires a commitment", alias="requiresCommitment")
-    __properties: ClassVar[List[str]] = ["id", "name", "vendorName", "shortDescription", "sku", "vendorSku", "altVendorSku", "requiresCommitment"]
+    __properties: ClassVar[List[str]] = ["id", "name", "vendorName", "shortDescription", "description", "sku", "vendorSku", "altVendorSku", "requiresCommitment"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -54,7 +55,7 @@ class Product(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of Product from a JSON string"""
+        """Create an instance of ProductDetail from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -81,7 +82,7 @@ class Product(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of Product from a dict"""
+        """Create an instance of ProductDetail from a dict"""
         if obj is None:
             return None
 
@@ -93,6 +94,7 @@ class Product(BaseModel):
             "name": obj.get("name"),
             "vendorName": obj.get("vendorName"),
             "shortDescription": obj.get("shortDescription"),
+            "description": obj.get("description"),
             "sku": obj.get("sku"),
             "vendorSku": obj.get("vendorSku"),
             "altVendorSku": obj.get("altVendorSku"),

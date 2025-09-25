@@ -17,24 +17,28 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class Product(BaseModel):
+class ContactType(BaseModel):
     """
-    Product
+    ContactType
     """ # noqa: E501
-    id: Optional[StrictStr] = None
-    name: Optional[StrictStr] = Field(default=None, description="The name of a product")
-    vendor_name: Optional[StrictStr] = Field(default=None, description="The name of the vendor", alias="vendorName")
-    short_description: Optional[StrictStr] = Field(default=None, description="A short description of the product", alias="shortDescription")
-    sku: Optional[StrictStr] = Field(default=None, description="The product sku")
-    vendor_sku: Optional[StrictStr] = Field(default=None, description="The product vendor sku", alias="vendorSku")
-    alt_vendor_sku: Optional[StrictStr] = Field(default=None, description="The Microsoft legacy sku has been deprecated. Please transition to vendorSku", alias="altVendorSku")
-    requires_commitment: Optional[StrictBool] = Field(default=None, description="Whether the product requires a commitment", alias="requiresCommitment")
-    __properties: ClassVar[List[str]] = ["id", "name", "vendorName", "shortDescription", "sku", "vendorSku", "altVendorSku", "requiresCommitment"]
+    type: Optional[StrictStr] = Field(default=None, description="A company must have a primary contact for each contact type. A single contact can be marked as a primary contact for all types Contact Type:   * `Admin` - Administrative contact   * `Billing` - Billing contact   * `Technical` - Technical contact ")
+    primary: Optional[StrictBool] = Field(default=None, description="Is this contact the primary contact for this Contact Type")
+    __properties: ClassVar[List[str]] = ["type", "primary"]
+
+    @field_validator('type')
+    def type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['Admin', 'Billing', 'Technical']):
+            raise ValueError("must be one of enum values ('Admin', 'Billing', 'Technical')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -54,7 +58,7 @@ class Product(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of Product from a JSON string"""
+        """Create an instance of ContactType from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -66,10 +70,8 @@ class Product(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
-        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
-            "id",
         ])
 
         _dict = self.model_dump(
@@ -81,7 +83,7 @@ class Product(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of Product from a dict"""
+        """Create an instance of ContactType from a dict"""
         if obj is None:
             return None
 
@@ -89,14 +91,8 @@ class Product(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "name": obj.get("name"),
-            "vendorName": obj.get("vendorName"),
-            "shortDescription": obj.get("shortDescription"),
-            "sku": obj.get("sku"),
-            "vendorSku": obj.get("vendorSku"),
-            "altVendorSku": obj.get("altVendorSku"),
-            "requiresCommitment": obj.get("requiresCommitment")
+            "type": obj.get("type"),
+            "primary": obj.get("primary")
         })
         return _obj
 

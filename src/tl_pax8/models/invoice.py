@@ -17,24 +17,26 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
-class Product(BaseModel):
+class Invoice(BaseModel):
     """
-    Product
+    Invoice
     """ # noqa: E501
-    id: Optional[StrictStr] = None
-    name: Optional[StrictStr] = Field(default=None, description="The name of a product")
-    vendor_name: Optional[StrictStr] = Field(default=None, description="The name of the vendor", alias="vendorName")
-    short_description: Optional[StrictStr] = Field(default=None, description="A short description of the product", alias="shortDescription")
-    sku: Optional[StrictStr] = Field(default=None, description="The product sku")
-    vendor_sku: Optional[StrictStr] = Field(default=None, description="The product vendor sku", alias="vendorSku")
-    alt_vendor_sku: Optional[StrictStr] = Field(default=None, description="The Microsoft legacy sku has been deprecated. Please transition to vendorSku", alias="altVendorSku")
-    requires_commitment: Optional[StrictBool] = Field(default=None, description="Whether the product requires a commitment", alias="requiresCommitment")
-    __properties: ClassVar[List[str]] = ["id", "name", "vendorName", "shortDescription", "sku", "vendorSku", "altVendorSku", "requiresCommitment"]
+    id: Optional[StrictStr] = Field(default=None, description="The id")
+    invoice_date: Optional[StrictStr] = Field(default=None, description="The date the invoice is generated for", alias="invoiceDate")
+    due_date: Optional[StrictStr] = Field(default=None, description="The date on which payment is due", alias="dueDate")
+    balance: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The current invoice balance")
+    carried_balance: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The outstanding balance until current invoiceDate", alias="carriedBalance")
+    total: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The total amount due")
+    currency_code: Optional[StrictStr] = Field(default=None, description="The currency ISO 4217 code", alias="currencyCode")
+    partner_name: Optional[StrictStr] = Field(default=None, description="The name of the invoiced partner", alias="partnerName")
+    company_id: Optional[StrictStr] = Field(default=None, description="The company id", alias="companyId")
+    external_id: Optional[StrictStr] = Field(default=None, description="The company external id", alias="externalId")
+    __properties: ClassVar[List[str]] = ["id", "invoiceDate", "dueDate", "balance", "carriedBalance", "total", "currencyCode", "partnerName", "companyId", "externalId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -54,7 +56,7 @@ class Product(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of Product from a JSON string"""
+        """Create an instance of Invoice from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -66,10 +68,8 @@ class Product(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
-        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
-            "id",
         ])
 
         _dict = self.model_dump(
@@ -81,7 +81,7 @@ class Product(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of Product from a dict"""
+        """Create an instance of Invoice from a dict"""
         if obj is None:
             return None
 
@@ -90,13 +90,15 @@ class Product(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "name": obj.get("name"),
-            "vendorName": obj.get("vendorName"),
-            "shortDescription": obj.get("shortDescription"),
-            "sku": obj.get("sku"),
-            "vendorSku": obj.get("vendorSku"),
-            "altVendorSku": obj.get("altVendorSku"),
-            "requiresCommitment": obj.get("requiresCommitment")
+            "invoiceDate": obj.get("invoiceDate"),
+            "dueDate": obj.get("dueDate"),
+            "balance": obj.get("balance"),
+            "carriedBalance": obj.get("carriedBalance"),
+            "total": obj.get("total"),
+            "currencyCode": obj.get("currencyCode"),
+            "partnerName": obj.get("partnerName"),
+            "companyId": obj.get("companyId"),
+            "externalId": obj.get("externalId")
         })
         return _obj
 
