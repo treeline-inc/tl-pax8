@@ -57,6 +57,7 @@ from tl_pax8.models.page import Page
 from tl_pax8.models.pricing import Pricing
 from tl_pax8.models.product import Product
 from tl_pax8.models.product_dependency import ProductDependency
+from tl_pax8.models.product_detail import ProductDetail
 from tl_pax8.models.provisioning_detail import ProvisioningDetail
 from tl_pax8.models.rate import Rate
 from tl_pax8.models.subscription import Subscription
