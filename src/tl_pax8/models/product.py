@@ -55,7 +55,8 @@ class Product(BaseModel):
             # Try parsing as JSON
             data = json.loads(self.vendor_sku)
             self.product_id = data.get("productId")
-            self.sku_id = data.get("skuId")
+            sku_id_value = data.get("skuId")
+            self.sku_id = str(sku_id_value) if sku_id_value is not None else None
             self.segment = data.get("segment") or data.get("segmentName")
         except json.JSONDecodeError:
             # Try parsing as productId:skuId format using regex if it's not JSON
