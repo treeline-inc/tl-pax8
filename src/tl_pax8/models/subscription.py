@@ -33,6 +33,7 @@ class Subscription(BaseModel):
     parent_subscription_id: Optional[StrictStr] = Field(default=None, alias="parentSubscriptionId")
     company_id: Optional[StrictStr] = Field(default=None, alias="companyId")
     product_id: Optional[StrictStr] = Field(default=None, alias="productId")
+    vendor_subscription_id: Optional[StrictStr] = Field(default=None, description="The vendor's unique identifier for this subscription", alias="vendorSubscriptionId")
     quantity: Union[StrictFloat, StrictInt]
     start_date: datetime = Field(alias="startDate")
     end_date: Optional[datetime] = Field(default=None, alias="endDate")
@@ -46,7 +47,7 @@ class Subscription(BaseModel):
     billing_term: StrictStr = Field(alias="billingTerm")
     provisioning_details: Optional[List[ProvisioningDetail]] = Field(default=None, alias="provisioningDetails")
     commitment_term: Optional[SubscriptionCommitment] = Field(default=None, alias="commitmentTerm")
-    __properties: ClassVar[List[str]] = ["id", "parentSubscriptionId", "companyId", "productId", "quantity", "startDate", "endDate", "createdDate", "updatedDate", "billingStart", "status", "price", "currencyCode", "partnerCost", "billingTerm", "provisioningDetails", "commitmentTerm"]
+    __properties: ClassVar[List[str]] = ["id", "parentSubscriptionId", "companyId", "productId", "vendorSubscriptionId", "quantity", "startDate", "endDate", "createdDate", "updatedDate", "billingStart", "status", "price", "currencyCode", "partnerCost", "billingTerm", "provisioningDetails", "commitmentTerm"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -61,8 +62,8 @@ class Subscription(BaseModel):
     @field_validator('billing_term')
     def billing_term_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['Monthly', 'Annual', '2-Year', '3-Year', '1-Time', 'Trial', 'Activation']):
-            raise ValueError("must be one of enum values ('Monthly', 'Annual', '2-Year', '3-Year', '1-Time', 'Trial', 'Activation')")
+        if value not in set(['Monthly', 'Annual', '2-Year', '3-Year', 'One-Time', 'Trial', 'Activation']):
+            raise ValueError("must be one of enum values ('Monthly', 'Annual', '2-Year', '3-Year', 'One-Time', 'Trial', 'Activation')")
         return value
 
     model_config = ConfigDict(
@@ -104,12 +105,14 @@ class Subscription(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
             "id",
             "parent_subscription_id",
             "company_id",
             "product_id",
+            "vendor_subscription_id",
             "created_date",
             "updated_date",
             "billing_start",
@@ -148,6 +151,7 @@ class Subscription(BaseModel):
             "parentSubscriptionId": obj.get("parentSubscriptionId"),
             "companyId": obj.get("companyId"),
             "productId": obj.get("productId"),
+            "vendorSubscriptionId": obj.get("vendorSubscriptionId"),
             "quantity": obj.get("quantity"),
             "startDate": obj.get("startDate"),
             "endDate": obj.get("endDate"),

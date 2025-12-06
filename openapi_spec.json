@@ -107,7 +107,7 @@
         "tags": [
           "Companies"
         ],
-        "summary": "Create a new Company",
+        "summary": "Create Company",
         "description": "Creates a new Company. ATTENTION - The Company will be placed in an “inactive” status until the [Company has primary Contacts added](#tag/Contacts). Once contacts are added, the company will move to “active”.",
         "operationId": "createCompany",
         "requestBody": {
@@ -157,7 +157,7 @@
         "tags": [
           "Companies"
         ],
-        "summary": "Fetch a paginated list of your companies",
+        "summary": "List Companies",
         "description": "Returns a paginated list of all your companies filtered by optional parameters",
         "operationId": "findCompanies",
         "parameters": [
@@ -316,7 +316,7 @@
         "tags": [
           "Companies"
         ],
-        "summary": "Fetch a single company record by companyId",
+        "summary": "Get Company By ID",
         "description": "Returns a single company record matching the ```companyId``` you specify",
         "parameters": [
           {
@@ -361,7 +361,7 @@
         "tags": [
           "Companies"
         ],
-        "summary": "Update an existing Company",
+        "summary": "Update Company",
         "description": "Updates an existing Company. ATTENTION - at least one parameter has to be modified.",
         "operationId": "updateCompany",
         "parameters": [
@@ -425,7 +425,7 @@
         "tags": [
           "Contacts"
         ],
-        "summary": "Create a new Contact",
+        "summary": "Create Contact",
         "description": "Creates a new Contact",
         "parameters": [
           {
@@ -486,7 +486,7 @@
         "tags": [
           "Contacts"
         ],
-        "summary": "Fetch a paginated list of contacts",
+        "summary": "List Contacts",
         "description": "Returns a paginated list of contacts ordered by ```createDate``` descending",
         "parameters": [
           {
@@ -562,7 +562,7 @@
         "tags": [
           "Contacts"
         ],
-        "summary": "Fetch a contact",
+        "summary": "Get Contact By ID",
         "description": "Returns a contact",
         "parameters": [
           {
@@ -623,7 +623,7 @@
         "tags": [
           "Contacts"
         ],
-        "summary": "Update a contact",
+        "summary": "Update Contact",
         "description": "Update a contacts information",
         "parameters": [
           {
@@ -695,7 +695,7 @@
         "tags": [
           "Contacts"
         ],
-        "summary": "Delete a contact",
+        "summary": "Delete Contact",
         "description": "Deletes a contact",
         "parameters": [
           {
@@ -752,7 +752,7 @@
         "tags": [
           "Products"
         ],
-        "summary": "Fetch a paginated list of Pax8 products",
+        "summary": "List Products",
         "description": "Returns a paginated list of Pax8 products filtered by optional query parameters",
         "operationId": "findAllProducts",
         "parameters": [
@@ -789,6 +789,16 @@
                 "name",
                 "vendor"
               ]
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Search on fields like name, vendor, SKU and ID.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "Office 365"
             }
           },
           {
@@ -832,7 +842,7 @@
         "tags": [
           "Products"
         ],
-        "summary": "Fetch a product by its productId",
+        "summary": "Get Product By ID",
         "description": "Returns only the product record for the productId you specify",
         "operationId": "findProductByProductId",
         "parameters": [
@@ -852,7 +862,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Product"
+                  "$ref": "#/components/schemas/ProductDetail"
                 },
                 "examples": {
                   "microsoft-office-365-e3": {
@@ -880,7 +890,7 @@
         "tags": [
           "Products"
         ],
-        "summary": "Fetch provisioning details for a specific product",
+        "summary": "Get Provisioning Details",
         "description": "Returns provisioning details for the specified productId. Provisioning details for a product are dynamic data.",
         "operationId": "findProvisionDetailsByProductId",
         "parameters": [
@@ -936,7 +946,7 @@
         "tags": [
           "Products"
         ],
-        "summary": "Fetch a list of product dependencies for a specified product",
+        "summary": "Get Product Dependencies",
         "description": "Returns associated dependencies for the specified ```productId```. A products dependencies are dynamic data.",
         "operationId": "findProductDependenciesByProductId",
         "parameters": [
@@ -984,7 +994,7 @@
         "tags": [
           "Products"
         ],
-        "summary": "Fetch pricing information for a particular product",
+        "summary": "Get Pricing",
         "description": "Returns recommended pricing and partner cost for the specified productId. A products pricing is dynamic data.",
         "operationId": "findPricingByProductId",
         "parameters": [
@@ -1047,7 +1057,7 @@
         "tags": [
           "Orders"
         ],
-        "summary": "Fetch a paginated list of orders associated with your partner",
+        "summary": "List Orders",
         "description": "Returns a paginated list of orders. Currently NOT supported for scheduled orders(orders with a future date).",
         "operationId": "findOrders",
         "parameters": [
@@ -1122,7 +1132,7 @@
         "tags": [
           "Orders"
         ],
-        "summary": "Create a new order for a specified company",
+        "summary": "Create Order",
         "description": "Create a new order. Currently NOT supported for scheduled orders(orders with a future date).",
         "operationId": "createOrder",
         "requestBody": {
@@ -1185,7 +1195,7 @@
         "tags": [
           "Orders"
         ],
-        "summary": "Fetch order details by orderId",
+        "summary": "Get Order By ID",
         "description": "Returns the Order record specified by OrderId. Currently NOT supported for scheduled orders",
         "operationId": "findOrdersByOrderId",
         "parameters": [
@@ -1234,7 +1244,7 @@
         "tags": [
           "Subscriptions"
         ],
-        "summary": "Fetch a paginated list of subscriptions",
+        "summary": "List Subscriptions",
         "description": "Fetch a paginated list of subscriptions. Default page is 0 and default size is 10. The maximum page size is 200",
         "operationId": "findSubscriptions",
         "parameters": [
@@ -1268,12 +1278,18 @@
             "schema": {
               "type": "string",
               "enum": [
-                "quantity",
-                "startDate",
-                "endDate",
-                "createdDate",
-                "billingStart",
-                "price"
+                "quantity,asc",
+                "quantity,desc",
+                "startDate,asc",
+                "startDate,desc",
+                "endDate,asc",
+                "endDate,desc",
+                "createdDate,asc",
+                "createdDate,desc",
+                "billingStart,asc",
+                "billingStart,desc",
+                "price,asc",
+                "price,desc"
               ]
             }
           },
@@ -1384,7 +1400,7 @@
         "tags": [
           "Subscriptions"
         ],
-        "summary": "Fetch a subscription by subscriptionId",
+        "summary": "Get Subscription By ID",
         "description": "Returns the Subscription record specified by the subscriptionId",
         "operationId": "findSubscriptionBySubscriptionId",
         "parameters": [
@@ -1430,7 +1446,7 @@
         "tags": [
           "Subscriptions"
         ],
-        "summary": "Update a specified subscription",
+        "summary": "Update Subscription",
         "description": "Updates a subscription. Currently NOT supported for subscriptions with a future date.",
         "operationId": "updateSubscription",
         "parameters": [
@@ -1497,7 +1513,7 @@
         "tags": [
           "Subscriptions"
         ],
-        "summary": "Cancel a subscription",
+        "summary": "Cancel Subscription",
         "description": "Cancels the Subscription specified by subscriptionId",
         "parameters": [
           {
@@ -1545,7 +1561,7 @@
         "tags": [
           "Subscriptions"
         ],
-        "summary": "Fetch the history of a subscription",
+        "summary": "Get Subscription History",
         "description": "Returns a list of changes for a subscription",
         "operationId": "findSubscriptionHistoryBySubscriptionId",
         "parameters": [
@@ -1601,7 +1617,7 @@
         "tags": [
           "Invoices"
         ],
-        "summary": "Fetch a paginated list of invoices",
+        "summary": "List Invoices",
         "description": "Fetch a paginated list of invoices. Default page is 0 and default size is 10. The maximum page size is 200",
         "operationId": "findPartnerInvoices",
         "parameters": [
@@ -1792,7 +1808,7 @@
         "tags": [
           "Invoices"
         ],
-        "summary": "Fetch an invoice by invoiceId",
+        "summary": "Get Invoice By ID",
         "description": "Fetch a paginated list of invoices. Default page is 0 and default size is 10. The maximum page size is 200",
         "operationId": "getPartnerInvoice",
         "parameters": [
@@ -1832,7 +1848,7 @@
         "tags": [
           "Invoices"
         ],
-        "summary": "Fetch a paginated list of items for an invoice",
+        "summary": "List Invoice Items",
         "description": "Fetch a paginated list of invoice items. Default page is 0 and default size is 10. The maximum page size is 200",
         "operationId": "findPartnerInvoiceItems",
         "parameters": [
@@ -1915,7 +1931,7 @@
         "tags": [
           "Usage Summaries"
         ],
-        "summary": "Fetch a paginated list of usage summaries",
+        "summary": "List Usage Summaries",
         "description": "Fetch a paginated list of usage summaries. Default page is 0 and default size is 10. The maximum page size is 200",
         "operationId": "findSubscriptionUsageSummaries",
         "parameters": [
@@ -2032,7 +2048,7 @@
         "tags": [
           "Usage Summaries"
         ],
-        "summary": "Fetch a usage summary by usageSummaryId",
+        "summary": "Get Usage Summary By ID",
         "description": "Fetch a paginated list of usage summaries. Default page is 0 and default size is 10. The maximum page size is 200",
         "operationId": "findSubscriptionUsageSummary",
         "parameters": [
@@ -2067,7 +2083,7 @@
         "tags": [
           "Usage Summaries"
         ],
-        "summary": "Fetch a paginated list of usage lines for a usage summary",
+        "summary": "List Usage Summary Lines",
         "description": "Fetch a paginated list of usage lines. Default page is 0 and default size is 10. The maximum page size is 200",
         "operationId": "findUsageLines",
         "parameters": [
@@ -2134,6 +2150,133 @@
           },
           "404": {
             "description": "Invalid usage summary id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/invoices/draftItems": {
+      "get": {
+        "tags": [
+          "Invoices"
+        ],
+        "summary": "List Draft Invoice Items",
+        "description": "Fetch a paginated list of draft invoice items before they are finalized into invoices. Default page is 0 and default size is 10. The maximum page size is 200.\n\nDISCLAIMER: For future-dated items, the data represents a snapshot of charges that will be applied to a future invoice as of the request date. This is not an actual invoice. Clients should be aware that the final invoice generated on the 5th of the month may differ. This endpoint does not include charges for usage-based products billed in arrears. Tax calculations are based on current account taxability status and current month tax rates, both of which are subject to change for future invoices.\n",
+        "operationId": "findPartnerDraftInvoiceItems",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The page number to request in the draft invoice items list",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "default": 0
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Returns _this_ number of draft invoice items per page",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "default": 10,
+              "minimum": 1,
+              "maximum": 200
+            }
+          },
+          {
+            "name": "monthOffset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ],
+              "default": 1
+            },
+            "description": "Number of months from current to return draft items for. 0 = current month, 1 = next month. Only values 0 and 1 are currently supported. If omitted, defaults to 1 (next month).\n"
+          },
+          {
+            "name": "companyId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "example": "7e338a9b-7bf5-4489-ad0a-59f5e664be19"
+            },
+            "description": "Filter draft items to a specific company.\n"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "content": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/InvoiceItem"
+                      }
+                    },
+                    "page": {
+                      "$ref": "#/components/schemas/Page"
+                    }
+                  }
+                },
+                "examples": {
+                  "draft-invoice-items": {
+                    "$ref": "#/components/examples/draft-invoice-items"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Company not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "408": {
+            "description": "Request timeout",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid monthOffset value",
             "content": {
               "application/json": {
                 "schema": {
@@ -2351,6 +2494,57 @@
             "example": "Short description about the product to sell",
             "description": "A short description of the product",
             "type": "string"
+          },
+          "sku": {
+            "type": "string",
+            "example": "4225-776-3234",
+            "description": "The product sku"
+          },
+          "vendorSku": {
+            "type": "string",
+            "example": "12345-AA-XYZ",
+            "description": "The product vendor sku"
+          },
+          "altVendorSku": {
+            "type": "string",
+            "format": "uuid",
+            "deprecated": true,
+            "description": "The Microsoft legacy sku has been deprecated. Please transition to vendorSku"
+          },
+          "requiresCommitment": {
+            "type": "boolean",
+            "example": false,
+            "description": "Whether the product requires a commitment"
+          }
+        }
+      },
+      "ProductDetail": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of a product",
+            "example": "Acme Corps Productivity Suite"
+          },
+          "vendorName": {
+            "type": "string",
+            "description": "The name of the vendor",
+            "example": "Acme Corps"
+          },
+          "shortDescription": {
+            "example": "Short description about the product to sell",
+            "description": "A short description of the product",
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "description": "A long description of the Product",
+            "example": "A Long description about the product to sell"
           },
           "sku": {
             "type": "string",
@@ -2746,6 +2940,11 @@
             "format": "uuid",
             "readOnly": true
           },
+          "vendorSubscriptionId": {
+            "type": "string",
+            "readOnly": true,
+            "description": "The vendor's unique identifier for this subscription"
+          },
           "quantity": {
             "type": "number"
           },
@@ -2811,7 +3010,7 @@
               "Annual",
               "2-Year",
               "3-Year",
-              "1-Time",
+              "One-Time",
               "Trial",
               "Activation"
             ]
@@ -2867,7 +3066,7 @@
               "Annual",
               "2-Year",
               "3-Year",
-              "1-Time",
+              "One-Time",
               "Trial",
               "Activation"
             ]
@@ -2942,7 +3141,7 @@
               "Annual",
               "2-Year",
               "3-Year",
-              "1-Time",
+              "One-Time",
               "Trial",
               "Activation"
             ]
@@ -3290,10 +3489,14 @@
             "type": "string",
             "description": "The currency ISO 4217 code"
           },
+          "salesTax": {
+            "type": "number",
+            "description": "The sales tax amount for this invoice item"
+          },
           "subscriptionId": {
             "type": "string",
             "format": "uuid",
-            "description": "If the type is 'subscription' or 'prorate' this field will contain the subscription identifier. Otherwise this field will be null."
+            "description": "The identifier of the associated subscription. This field will contain the subscription identifier for all product types, allowing partners to link this invoice line item to the relevant subscription details. Products that do not have a subscription id (i.e., BitTitan migration) will return a null value."
           }
         }
       },
@@ -3508,6 +3711,7 @@
           "name": "Microsoft Office 365 E3",
           "vendorName": "Microsoft",
           "shortDescription": "Microsoft Office 365 E3 includes fully installed Office applications across multiple devices, email hosting, HD video conferencing, and features to support compliance.",
+          "description": "Microsoft 365 E3 is part of a new lineup of M365 and O365 suites that don't include Teams. Microsoft 365 E3 is designed for large organizations and integrates Office 365 Enterprise E3, Windows 10 Enterprise, and Enterprise Mobility + Security to empower employees to be creative and work together, securely. The comprehensive set of services range from Office apps like Word and Excel, to video conferencing apps, to robust security, mobile device management, and identity and access management. This solution lets you improve productivity and foster a culture of collaboration with connected experiences and transform how you manage your business and enhance customer relationships with integrated workflows. Plus, you can proactively protect your employees, data, and customer information with intelligent security. ",
           "sku": "MST-OFC-EE3-C100",
           "vendorSku": "796B6B5F-613C-4E24-A17C-EBA730D49C02"
         }
@@ -4367,6 +4571,7 @@
               "billingFeeRate": 0,
               "amountDue": 27500,
               "currencyCode": "USD",
+              "salesTax": 2200,
               "subscriptionId": "f6b60139-8ab6-45f4-b808-354ebbe53070"
             }
           ],
@@ -4652,6 +4857,78 @@
             "size": 10,
             "totalElements": 115,
             "totalPages": 11,
+            "number": 0
+          }
+        }
+      },
+      "draft-invoice-items": {
+        "summary": "A draft invoice items page",
+        "description": "A draft invoice items page example",
+        "value": {
+          "content": [
+            {
+              "type": "subscription",
+              "companyId": "7e338a9b-7bf5-4489-ad0a-59f5e664be19",
+              "companyName": "09/19 Ben",
+              "startPeriod": "2025-02-01",
+              "endPeriod": "2025-02-28",
+              "quantity": 1,
+              "unitOfMeasure": "User",
+              "term": "Monthly",
+              "sku": "LIG-HTN-ING-BLT2",
+              "description": "Lightning Bolt 2",
+              "rateType": "single",
+              "chargeType": "per",
+              "price": 120,
+              "subTotal": 120,
+              "cost": 100,
+              "costTotal": 100,
+              "offeredBy": "Pax8",
+              "billedByPax8": false,
+              "total": 120,
+              "productId": "fd8ec391-b6c0-4895-9dc6-74b7e8494ee3",
+              "productName": "Lightning Bolt 2",
+              "billingFee": 0,
+              "billingFeeRate": 0,
+              "amountDue": 120,
+              "currencyCode": "USD",
+              "salesTax": 8,
+              "subscriptionId": "b2c47da5-d16e-4fcb-98d7-6e97b3c8f11a"
+            },
+            {
+              "type": "subscription",
+              "companyId": "7e338a9b-7bf5-4489-ad0a-59f5e664be19",
+              "companyName": "09/19 Ben",
+              "startPeriod": "2024-07-01",
+              "endPeriod": "2024-07-31",
+              "quantity": 5,
+              "unitOfMeasure": "User",
+              "term": "Monthly",
+              "sku": "MS-OFF-EXC-PRO",
+              "description": "Microsoft Office Excel Pro",
+              "rateType": "single",
+              "chargeType": "per",
+              "price": 85,
+              "subTotal": 425,
+              "cost": 75,
+              "costTotal": 375,
+              "offeredBy": "Pax8",
+              "billedByPax8": false,
+              "total": 425,
+              "productId": "a34eef76-8c9b-4521-9c7c-bf5417a8e123",
+              "productName": "Microsoft Office Excel Pro",
+              "billingFee": 0,
+              "billingFeeRate": 0,
+              "amountDue": 425,
+              "currencyCode": "USD",
+              "salesTax": 30,
+              "subscriptionId": "c5e82a19-d738-48f9-a1b3-9c6f4e7d3210"
+            }
+          ],
+          "page": {
+            "size": 10,
+            "totalElements": 115,
+            "totalPages": 12,
             "number": 0
           }
         }

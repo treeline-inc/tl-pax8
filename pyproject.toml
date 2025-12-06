@@ -1,6 +1,6 @@
 [project]
 name = "tl-pax8"
-version = "0.1.0"
+version = "0.2.0"
 description = "Pax8 API client"
 authors = [
     { name = "Treeline Engineering", email = "engineering@treeline.ai" }
