@@ -43,8 +43,8 @@ class CreateLineItem(BaseModel):
     @field_validator('billing_term')
     def billing_term_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['Monthly', 'Annual', '2-Year', '3-Year', '1-Time', 'Trial', 'Activation']):
-            raise ValueError("must be one of enum values ('Monthly', 'Annual', '2-Year', '3-Year', '1-Time', 'Trial', 'Activation')")
+        if value not in set(['Monthly', 'Annual', '2-Year', '3-Year', 'One-Time', 'Trial', 'Activation']):
+            raise ValueError("must be one of enum values ('Monthly', 'Annual', '2-Year', '3-Year', 'One-Time', 'Trial', 'Activation')")
         return value
 
     model_config = ConfigDict(

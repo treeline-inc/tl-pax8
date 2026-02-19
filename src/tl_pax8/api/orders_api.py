@@ -59,7 +59,7 @@ class OrdersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Order:
-        """Create a new order for a specified company
+        """Create Order
 
         Create a new order. Currently NOT supported for scheduled orders(orders with a future date).
 
@@ -131,7 +131,7 @@ class OrdersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Order]:
-        """Create a new order for a specified company
+        """Create Order
 
         Create a new order. Currently NOT supported for scheduled orders(orders with a future date).
 
@@ -203,7 +203,7 @@ class OrdersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Create a new order for a specified company
+        """Create Order
 
         Create a new order. Currently NOT supported for scheduled orders(orders with a future date).
 
@@ -354,7 +354,7 @@ class OrdersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FindOrders200Response:
-        """Fetch a paginated list of orders associated with your partner
+        """List Orders
 
         Returns a paginated list of orders. Currently NOT supported for scheduled orders(orders with a future date).
 
@@ -430,7 +430,7 @@ class OrdersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FindOrders200Response]:
-        """Fetch a paginated list of orders associated with your partner
+        """List Orders
 
         Returns a paginated list of orders. Currently NOT supported for scheduled orders(orders with a future date).
 
@@ -506,7 +506,7 @@ class OrdersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Fetch a paginated list of orders associated with your partner
+        """List Orders
 
         Returns a paginated list of orders. Currently NOT supported for scheduled orders(orders with a future date).
 
@@ -652,7 +652,7 @@ class OrdersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Order:
-        """Fetch order details by orderId
+        """Get Order By ID
 
         Returns the Order record specified by OrderId. Currently NOT supported for scheduled orders
 
@@ -720,7 +720,7 @@ class OrdersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Order]:
-        """Fetch order details by orderId
+        """Get Order By ID
 
         Returns the Order record specified by OrderId. Currently NOT supported for scheduled orders
 
@@ -788,7 +788,7 @@ class OrdersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Fetch order details by orderId
+        """Get Order By ID
 
         Returns the Order record specified by OrderId. Currently NOT supported for scheduled orders
 

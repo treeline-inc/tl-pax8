@@ -23,7 +23,7 @@ from tl_pax8.models.dependencies import Dependencies
 from tl_pax8.models.find_all_products200_response import FindAllProducts200Response
 from tl_pax8.models.find_pricing_by_product_id200_response import FindPricingByProductId200Response
 from tl_pax8.models.find_provision_details_by_product_id200_response import FindProvisionDetailsByProductId200Response
-from tl_pax8.models.product import Product
+from tl_pax8.models.product_detail import ProductDetail
 
 from tl_pax8.api_client import ApiClient, RequestSerialized
 from tl_pax8.api_response import ApiResponse
@@ -49,6 +49,7 @@ class ProductsApi:
         page: Annotated[Optional[Union[StrictFloat, StrictInt]], Field(description="The page number to request for in the products list")] = None,
         size: Annotated[Optional[Union[Annotated[float, Field(le=200, strict=True, ge=1)], Annotated[int, Field(le=200, strict=True, ge=1)]]], Field(description="Return this number of products per page")] = None,
         sort: Annotated[Optional[StrictStr], Field(description="Return products sorted by the field and direction specified. Formatted as fieldName, direction - ex. sort=name,desc")] = None,
+        search: Annotated[Optional[StrictStr], Field(description="Search on fields like name, vendor, SKU and ID.")] = None,
         vendor_name: Annotated[Optional[StrictStr], Field(description="Return only products matching the specified vendor name")] = None,
         _request_timeout: Union[
             None,
@@ -63,7 +64,7 @@ class ProductsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FindAllProducts200Response:
-        """Fetch a paginated list of Pax8 products
+        """List Products
 
         Returns a paginated list of Pax8 products filtered by optional query parameters
 
@@ -73,6 +74,8 @@ class ProductsApi:
         :type size: float
         :param sort: Return products sorted by the field and direction specified. Formatted as fieldName, direction - ex. sort=name,desc
         :type sort: str
+        :param search: Search on fields like name, vendor, SKU and ID.
+        :type search: str
         :param vendor_name: Return only products matching the specified vendor name
         :type vendor_name: str
         :param _request_timeout: timeout setting for this request. If one
@@ -101,6 +104,7 @@ class ProductsApi:
             page=page,
             size=size,
             sort=sort,
+            search=search,
             vendor_name=vendor_name,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -128,6 +132,7 @@ class ProductsApi:
         page: Annotated[Optional[Union[StrictFloat, StrictInt]], Field(description="The page number to request for in the products list")] = None,
         size: Annotated[Optional[Union[Annotated[float, Field(le=200, strict=True, ge=1)], Annotated[int, Field(le=200, strict=True, ge=1)]]], Field(description="Return this number of products per page")] = None,
         sort: Annotated[Optional[StrictStr], Field(description="Return products sorted by the field and direction specified. Formatted as fieldName, direction - ex. sort=name,desc")] = None,
+        search: Annotated[Optional[StrictStr], Field(description="Search on fields like name, vendor, SKU and ID.")] = None,
         vendor_name: Annotated[Optional[StrictStr], Field(description="Return only products matching the specified vendor name")] = None,
         _request_timeout: Union[
             None,
@@ -142,7 +147,7 @@ class ProductsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FindAllProducts200Response]:
-        """Fetch a paginated list of Pax8 products
+        """List Products
 
         Returns a paginated list of Pax8 products filtered by optional query parameters
 
@@ -152,6 +157,8 @@ class ProductsApi:
         :type size: float
         :param sort: Return products sorted by the field and direction specified. Formatted as fieldName, direction - ex. sort=name,desc
         :type sort: str
+        :param search: Search on fields like name, vendor, SKU and ID.
+        :type search: str
         :param vendor_name: Return only products matching the specified vendor name
         :type vendor_name: str
         :param _request_timeout: timeout setting for this request. If one
@@ -180,6 +187,7 @@ class ProductsApi:
             page=page,
             size=size,
             sort=sort,
+            search=search,
             vendor_name=vendor_name,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -207,6 +215,7 @@ class ProductsApi:
         page: Annotated[Optional[Union[StrictFloat, StrictInt]], Field(description="The page number to request for in the products list")] = None,
         size: Annotated[Optional[Union[Annotated[float, Field(le=200, strict=True, ge=1)], Annotated[int, Field(le=200, strict=True, ge=1)]]], Field(description="Return this number of products per page")] = None,
         sort: Annotated[Optional[StrictStr], Field(description="Return products sorted by the field and direction specified. Formatted as fieldName, direction - ex. sort=name,desc")] = None,
+        search: Annotated[Optional[StrictStr], Field(description="Search on fields like name, vendor, SKU and ID.")] = None,
         vendor_name: Annotated[Optional[StrictStr], Field(description="Return only products matching the specified vendor name")] = None,
         _request_timeout: Union[
             None,
@@ -221,7 +230,7 @@ class ProductsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Fetch a paginated list of Pax8 products
+        """List Products
 
         Returns a paginated list of Pax8 products filtered by optional query parameters
 
@@ -231,6 +240,8 @@ class ProductsApi:
         :type size: float
         :param sort: Return products sorted by the field and direction specified. Formatted as fieldName, direction - ex. sort=name,desc
         :type sort: str
+        :param search: Search on fields like name, vendor, SKU and ID.
+        :type search: str
         :param vendor_name: Return only products matching the specified vendor name
         :type vendor_name: str
         :param _request_timeout: timeout setting for this request. If one
@@ -259,6 +270,7 @@ class ProductsApi:
             page=page,
             size=size,
             sort=sort,
+            search=search,
             vendor_name=vendor_name,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -281,6 +293,7 @@ class ProductsApi:
         page,
         size,
         sort,
+        search,
         vendor_name,
         _request_auth,
         _content_type,
@@ -315,6 +328,10 @@ class ProductsApi:
         if sort is not None:
             
             _query_params.append(('sort', sort))
+            
+        if search is not None:
+            
+            _query_params.append(('search', search))
             
         if vendor_name is not None:
             
@@ -375,7 +392,7 @@ class ProductsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FindPricingByProductId200Response:
-        """Fetch pricing information for a particular product
+        """Get Pricing
 
         Returns recommended pricing and partner cost for the specified productId. A products pricing is dynamic data.
 
@@ -447,7 +464,7 @@ class ProductsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FindPricingByProductId200Response]:
-        """Fetch pricing information for a particular product
+        """Get Pricing
 
         Returns recommended pricing and partner cost for the specified productId. A products pricing is dynamic data.
 
@@ -519,7 +536,7 @@ class ProductsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Fetch pricing information for a particular product
+        """Get Pricing
 
         Returns recommended pricing and partner cost for the specified productId. A products pricing is dynamic data.
 
@@ -654,8 +671,8 @@ class ProductsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Product:
-        """Fetch a product by its productId
+    ) -> ProductDetail:
+        """Get Product By ID
 
         Returns only the product record for the productId you specify
 
@@ -692,7 +709,7 @@ class ProductsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Product",
+            '200': "ProductDetail",
             '404': "Error",
         }
         response_data = self.api_client.call_api(
@@ -722,8 +739,8 @@ class ProductsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Product]:
-        """Fetch a product by its productId
+    ) -> ApiResponse[ProductDetail]:
+        """Get Product By ID
 
         Returns only the product record for the productId you specify
 
@@ -760,7 +777,7 @@ class ProductsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Product",
+            '200': "ProductDetail",
             '404': "Error",
         }
         response_data = self.api_client.call_api(
@@ -791,7 +808,7 @@ class ProductsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Fetch a product by its productId
+        """Get Product By ID
 
         Returns only the product record for the productId you specify
 
@@ -828,7 +845,7 @@ class ProductsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Product",
+            '200': "ProductDetail",
             '404': "Error",
         }
         response_data = self.api_client.call_api(
@@ -919,7 +936,7 @@ class ProductsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Dependencies:
-        """Fetch a list of product dependencies for a specified product
+        """Get Product Dependencies
 
         Returns associated dependencies for the specified ```productId```. A products dependencies are dynamic data.
 
@@ -987,7 +1004,7 @@ class ProductsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Dependencies]:
-        """Fetch a list of product dependencies for a specified product
+        """Get Product Dependencies
 
         Returns associated dependencies for the specified ```productId```. A products dependencies are dynamic data.
 
@@ -1055,7 +1072,7 @@ class ProductsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Fetch a list of product dependencies for a specified product
+        """Get Product Dependencies
 
         Returns associated dependencies for the specified ```productId```. A products dependencies are dynamic data.
 
@@ -1183,7 +1200,7 @@ class ProductsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FindProvisionDetailsByProductId200Response:
-        """Fetch provisioning details for a specific product
+        """Get Provisioning Details
 
         Returns provisioning details for the specified productId. Provisioning details for a product are dynamic data.
 
@@ -1251,7 +1268,7 @@ class ProductsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FindProvisionDetailsByProductId200Response]:
-        """Fetch provisioning details for a specific product
+        """Get Provisioning Details
 
         Returns provisioning details for the specified productId. Provisioning details for a product are dynamic data.
 
@@ -1319,7 +1336,7 @@ class ProductsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Fetch provisioning details for a specific product
+        """Get Provisioning Details
 
         Returns provisioning details for the specified productId. Provisioning details for a product are dynamic data.
 
